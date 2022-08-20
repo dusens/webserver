@@ -15,7 +15,9 @@
 
 
 class Buffer {
-    Buffer(int initBuffSize = 1024);
+
+public:
+    explicit Buffer(int initBuffSize = 1024);
 
     ~Buffer() = default;
 
@@ -37,7 +39,35 @@ class Buffer {
 
     void RetrieveAll();
 
-    std::string
+    std::string RetrieveAllToStr();
+
+    const char *BeginWriteConst() const;
+
+    char *BeginWrite();
+
+    void Append(const std::string &str);
+
+    void Append(const char *str, size_t len);
+
+    void Append(const void *data, size_t len);
+
+    void Append(const Buffer &buff);
+
+    ssize_t ReadFd(int fd, int *Errno);
+
+    ssize_t Write(int fd, int *Errno);
+
+private:
+    char *BeginPtr_();
+
+    const char *BeginPtr_() const;
+
+    void MakeSpace_(size_t len);
+
+    std::vector<char> buffer_;
+
+    std::atomic<std::size_t> readPos_;
+    std::atomic<std::size_t> writePos_;
 };
 
 
