@@ -21,7 +21,7 @@ public:
 
     ~Buffer() = default;
 
-    size_t WriteableBytes() const;
+    size_t WritableBytes() const;
 
     size_t ReadableBytes() const;
 
@@ -31,7 +31,7 @@ public:
 
     void EnsureWriteable(size_t len);
 
-    void HashWriten(size_t len);
+    void HasWritten(size_t len);
 
     void Retrieve(size_t len);
 
@@ -55,7 +55,7 @@ public:
 
     ssize_t ReadFd(int fd, int *Errno);
 
-    ssize_t Write(int fd, int *Errno);
+    ssize_t WriteFd(int fd, int *Errno);
 
 private:
     char *BeginPtr_();
